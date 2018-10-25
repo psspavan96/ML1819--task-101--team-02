@@ -42,7 +42,7 @@ test_x = f[~rnd_indices]
 test_y = l[~rnd_indices]
 
 k = 4
-batch_size=1000
+batch_size=len(test_x) # all in one batch
 
 # Placeholders
 X_data_train = tf.placeholder(shape=[None, n_dim], dtype=tf.float32)
@@ -51,7 +51,7 @@ Y_target_train = tf.placeholder(shape=[None, 1], dtype=tf.float32)
 Y_target_test = tf.placeholder(shape=[None, 1], dtype=tf.float32)
 
 # Declare distance metric
-# L1
+# Minkowski distance
 distance = tf.reduce_sum(tf.abs(tf.subtract(X_data_train, tf.expand_dims(X_data_test,1))), axis=2)
 
 # Predict: Get min distance index (Nearest neighbor)
@@ -68,7 +68,7 @@ rmse = tf.sqrt(tf.reduce_mean(tf.square(tf.subtract(prediction, Y_target_test)))
 
 
 # Calculate how many loops over training data
-num_loops = int(np.ceil(len(test_x)/batch_size))
+num_loops = int(np.ceil(len(test_x)/batch_size)) # essentially 1 loop
 
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
@@ -89,7 +89,8 @@ with tf.Session() as session:
 
     results.append(batch_rmse)
 
-  print("Batch rmse: %s" % results)
+  avg_rmse = sum(results)/len(results)
+  print("Rmse: %s" % avg_rmse)
 
   # fig, ax = plt.subplots()
   # ax.scatter(test_y, pred_y)
