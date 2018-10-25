@@ -87,7 +87,7 @@ with tf.Session() as session:
     batch_rmse = session.run(rmse, feed_dict={X_data_train: train_x, X_data_test: batch_x,
       Y_target_train: train_y, Y_target_test: batch_y})
 
-    results.append(math.sqrt(batch_rmse))
+    results.append(batch_rmse)
 
   print("Batch rmse: %s" % results)
 
