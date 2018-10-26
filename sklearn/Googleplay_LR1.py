@@ -9,9 +9,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from subprocess import check_output
-get_ipython().run_line_magic('matplotlib', 'inline')
+# get_ipython().run_line_magic('matplotlib', 'inline')
 import plotly.offline as py
-py.init_notebook_mode(connected=True)
+# py.init_notebook_mode(connected=True)
 import plotly.graph_objs as go
 import plotly.tools as tls
 import os
@@ -26,20 +26,20 @@ from bs4 import BeautifulSoup
 # In[2]:
 
 
-df = pd.read_csv("/Users/pavanpss/Downloads/google-play-store-apps/googleplaystore.csv")
-print("Number of data points:",df.shape[0])
+df = pd.read_csv("../dataset.orig/google-play-store-apps/googleplaystore.csv")
+# print("Number of data points:",df.shape[0])
 
 
 # In[3]:
 
 
-df.head()
+# df.head()
 
 
 # In[4]:
 
 
-df.info()
+# df.info()
 
 
 # In[5]:
@@ -142,26 +142,26 @@ df["Content Rating"] = df[["Content Rating"]].fillna(method="ffill")
 # In[19]:
 
 
-df.info()
+# df.info()
 
 
 # In[20]:
 
 
-df.shape
+# df.shape
 
 
 # In[21]:
 
 
-df.head()
+# df.head()
 
 
 # In[22]:
 
 
 del df["Content Rating"]
-df
+# df
 
 
 # In[24]:
@@ -181,10 +181,10 @@ from sklearn.model_selection import train_test_split
 X = df.drop('Rating', axis = 1)
 Y = df['Rating']
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 5)
-print(X_train.shape)
-print(X_test.shape)
-print(Y_train.shape)
-print(Y_test.shape)
+# print(X_train.shape)
+# print(X_test.shape)
+# print(Y_train.shape)
+# print(Y_test.shape)
 
 
 # In[26]:
@@ -235,7 +235,8 @@ plt.show()
 
 
 from sklearn.metrics import mean_squared_error, r2_score
-print("Mean squared error: %.2f"% mean_squared_error(Y_test, y_pred))
+mse = mean_squared_error(Y_test, y_pred)
+print("Mean squared error: %.2f"% mse)
 # Explained variance score: 1 is perfect prediction
 print('Variance score: %.2f' % r2_score(Y_test, y_pred))
 
@@ -243,11 +244,10 @@ print('Variance score: %.2f' % r2_score(Y_test, y_pred))
 # In[35]:
 
 
-from sklearn.metrics import mean_squared_error
 from math import sqrt
 
-rms = sqrt(mean_squared_error(Y_test, y_pred))
-print(rms)
+rms = sqrt(mse)
+print("Rmse: ", rms)
 
 
 # In[36]:
@@ -255,7 +255,7 @@ print(rms)
 
 from sklearn.metrics import mean_absolute_error
 mae = mean_absolute_error(Y_test,y_pred)
-print(mae)
+print("Mae: ", mae)
 
 
 # In[ ]:

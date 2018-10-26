@@ -9,9 +9,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from subprocess import check_output
-get_ipython().run_line_magic('matplotlib', 'inline')
+# get_ipython().run_line_magic('matplotlib', 'inline')
 import plotly.offline as py
-py.init_notebook_mode(connected=True)
+# py.init_notebook_mode(connected=True)
 import plotly.graph_objs as go
 import plotly.tools as tls
 import os
@@ -26,20 +26,20 @@ from bs4 import BeautifulSoup
 # In[96]:
 
 
-df = pd.read_csv("/Users/pavanpss/Desktop/Cleaned.csv")
-print("Number of data points:",df.shape[0])
+df = pd.read_csv("../dataset.preprocessed/cleaned.csv")
+# print("Number of data points:",df.shape[0])
 
 
 # In[97]:
 
 
-df.head()
+# df.head()
 
 
 # In[98]:
 
 
-df.info()
+# df.info()
 
 
 # In[99]:
@@ -72,16 +72,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 # In[102]:
 
 
-print(X_train.shape)
-print(X_test.shape)
-print(y_train.shape)
-print(y_test.shape)
+# print(X_train.shape)
+# print(X_test.shape)
+# print(y_train.shape)
+# print(y_test.shape)
 
 
 # In[103]:
 
 
-get_ipython().run_line_magic('matplotlib', 'inline')
+# get_ipython().run_line_magic('matplotlib', 'inline')
 import warnings
 warnings.filterwarnings("ignore")
 from sklearn import preprocessing
@@ -126,7 +126,7 @@ import seaborn as sn
 knen = KNeighborsClassifier(n_neighbors=1,algorithm='auto')
 knen.fit(X_train_scaled,y_train_enc)
 y_pred = knen.predict(X_test_scaled)
-print(y_pred)
+# print(y_pred)
 print("Accuracy on test set: %0.2f%%"%(accuracy_score(y_test, y_pred)*100))
 
 
@@ -136,10 +136,10 @@ print("Accuracy on test set: %0.2f%%"%(accuracy_score(y_test, y_pred)*100))
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 
-rms = sqrt(mean_squared_error(y_test, y_pred))
-print(rms)
 mse = mean_squared_error(y_test, y_pred)
-print(mse)
+print("Mse: ", mse)
+rms = sqrt(mse)
+print("Rmse: ", rms)
 
 
 # In[ ]:

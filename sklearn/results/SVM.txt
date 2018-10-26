@@ -1,0 +1,2 @@
+Accuracy on test set: 57.865%
+F1-Score on test set: 0.40
