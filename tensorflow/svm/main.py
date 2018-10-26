@@ -105,12 +105,4 @@ with tf.Session() as session:
   accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
   print("Test accuracy: %f" % session.run(accuracy, feed_dict={X: test_x, Y: test_y}))
-  # squared_difference
 
-  # fig, ax = plt.subplots()
-  # ax.scatter(test_y, pred_y)
-  # ax.plot([test_y.min(), test_y.max()], [test_y.min(), test_y.max()], 'k--', lw=3)
-  # ax.set_xlabel('Measured')
-  # ax.set_ylabel('Predicted')
-  # fig.savefig('pred.png')
-  # plt.show()

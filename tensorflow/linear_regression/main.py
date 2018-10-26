@@ -103,4 +103,3 @@ with tf.Session() as session:
   ax.set_xlabel('Measured')
   ax.set_ylabel('Predicted')
   fig.savefig('pred.png')
-  # plt.show()

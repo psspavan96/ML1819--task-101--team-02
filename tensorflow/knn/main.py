@@ -42,7 +42,8 @@ test_x = f[~rnd_indices]
 test_y = l[~rnd_indices]
 
 k = 4
-batch_size=len(test_x) # all in one batch
+batch_size=100
+# batch_size=len(test_x) # all in one batch
 
 # Placeholders
 X_data_train = tf.placeholder(shape=[None, n_dim], dtype=tf.float32)
@@ -91,11 +92,3 @@ with tf.Session() as session:
 
   avg_rmse = sum(results)/len(results)
   print("Rmse: %s" % avg_rmse)
-
-  # fig, ax = plt.subplots()
-  # ax.scatter(test_y, pred_y)
-  # ax.plot([test_y.min(), test_y.max()], [test_y.min(), test_y.max()], 'k--', lw=3)
-  # ax.set_xlabel('Measured')
-  # ax.set_ylabel('Predicted')
-  # fig.savefig('pred.png')
-  # plt.show()
