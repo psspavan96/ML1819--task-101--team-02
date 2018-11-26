@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # coding: utf-8
 import seaborn as sns; sns.set(color_codes=True)
 import pandas as pd
@@ -5,7 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 df = pd.read_csv("../../dataset.preprocessed/cleaned.csv", index_col=0)
-df.drop('Rated 4.4 or more', axis=1)
 
 g = sns.lmplot(x="Reviews", y="Rating", data=df)
 g.savefig('reviews-rating.png')
@@ -13,7 +13,7 @@ g.savefig('reviews-rating.png')
 g = sns.catplot(x="Rated 4.4 or more", y="Reviews", data=df)
 g.savefig('rated4.4ormore-reviews.png')
 
-
+df = df.drop('Rated 4.4 or more', axis=1)
 corr = df.corr()
 
 # Generate a mask for the upper triangle
