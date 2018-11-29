@@ -109,9 +109,11 @@ df_test_new['Education'] = df_test_new['Education'].fillna(method ='pad')
 # Using none to fill Nan values in Communication and Outcome fields
 df_new['Communication'] = df_new['Communication'].fillna('none')
 df_new['Outcome'] = df_new['Outcome'].fillna('none')
+df_new['CallDurationSeconds'] = (pd.to_datetime(df_new['CallEnd']) - pd.to_datetime(df_new['CallStart'])).astype('timedelta64[s]')
 
 df_test_new['Communication'] = df_test_new['Communication'].fillna('none')
 df_test_new['Outcome'] = df_test_new['Outcome'].fillna('none')
+df_test_new['CallDurationSeconds'] = (pd.to_datetime(df_test_new['CallEnd']) - pd.to_datetime(df_test_new['CallStart'])).astype('timedelta64[s]')
 
 
 # In[15]:
