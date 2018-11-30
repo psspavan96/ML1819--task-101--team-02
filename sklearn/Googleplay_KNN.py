@@ -26,7 +26,7 @@ from bs4 import BeautifulSoup
 # In[96]:
 
 
-df = pd.read_csv("../dataset.preprocessed/cleaned.csv")
+df = pd.read_csv("../dataset.preprocessed/googleplay/cleaned.csv")
 # print("Number of data points:",df.shape[0])
 
 

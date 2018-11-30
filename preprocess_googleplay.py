@@ -69,13 +69,13 @@ df["Rated 4.4 or more"] = [ 1 if (i >= 4.4) else -1 for i in df['Rating'] ]
 # print(y_train.shape)
 # print(y_test.shape)
 
-df.to_csv("./dataset.preprocessed/cleaned.csv")
+df.to_csv("./dataset.preprocessed/googleplay/cleaned.csv")
 # X_train.to_csv("./dataset.preprocessed/X_train.csv")
 # y_train.to_csv("./dataset.preprocessed/y_train.csv")
 # X_test.to_csv("./dataset.preprocessed/X_test.csv")
 # y_test.to_csv("./dataset.preprocessed/y_test.csv")
 
-# np.savetxt("./dataset.preprocessed/cleaned.csv", df, delimiter=",")
+# np.savetxt("./dataset.preprocessed/googleplay/cleaned.csv", df, delimiter=",")
 # np.savetxt("./dataset.preprocessed/X_train.csv", X_train, delimiter=",")
 # np.savetxt("./dataset.preprocessed/y_train.csv", y_train, delimiter=",")
 # np.savetxt("./dataset.preprocessed/X_test.csv", X_test, delimiter=",")
