@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("../../dataset.preprocessed/cleaned.csv", index_col=0)
+df = pd.read_csv("../../dataset.preprocessed/googleplay/cleaned.csv", index_col=0)
 
 g = sns.lmplot(x="Reviews", y="Rating", data=df)
 g.savefig('reviews-rating.png')

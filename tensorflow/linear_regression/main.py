@@ -29,7 +29,7 @@ def append_bias_reshape(features,labels):
   l = np.reshape(labels,[n_training_samples,1])
   return f, l
 
-features,labels = read_dataset('../../dataset.preprocessed/cleaned.csv')
+features,labels = read_dataset('../../dataset.preprocessed/googleplay/cleaned.csv')
 normalized_features = feature_normalize(features)
 f, l = append_bias_reshape(normalized_features,labels)
 n_dim = f.shape[1]
