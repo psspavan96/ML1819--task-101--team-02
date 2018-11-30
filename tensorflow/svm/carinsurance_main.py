@@ -13,8 +13,8 @@ def read_dataset(filePath,delimiter=','):
   data = genfromtxt(filePath, delimiter=delimiter)
   data = np.delete(data, (0), axis=0)
   data = np.delete(data, (0), axis=1)
-  labels = data[:,1] # ratings as y
-  features = data[:, [2]] # reviews as x
+  labels = data[:,7] # Carloan as y
+  features = data[:, [5]] # Balance as x
   return features, labels
 
 def feature_normalize(dataset):
@@ -29,7 +29,7 @@ def append_bias_reshape(features,labels):
   l = np.reshape(labels,[n_training_samples,1])
   return f, l
 
-features,labels = read_dataset('../../dataset.preprocessed/googleplay/cleaned.csv')
+features,labels = read_dataset('../../dataset.preprocessed/carinsurance/cleaned.csv')
 normalized_features = feature_normalize(features)
 f, l = append_bias_reshape(normalized_features,labels)
 n_dim = f.shape[1]
@@ -42,6 +42,7 @@ test_x = f[~rnd_indices]
 test_y = l[~rnd_indices]
 
 learning_rate = 0.01
+lambd = tf.constant([0.01])
 training_epochs = 1000
 cost_history = np.empty(shape=[1],dtype=float)
 
@@ -50,56 +51,58 @@ Y = tf.placeholder(tf.float32,[None,1])
 W = tf.Variable(tf.ones([n_dim,1]))
 
 
-# LR
-y_ = tf.matmul(X, W)
-cost = tf.reduce_mean(tf.square(y_ - Y))
-training_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
+# SVM
+y_ = tf.nn.softmax(tf.matmul(X,W))
+regularization_loss = 0.5*tf.reduce_sum(tf.square(W))
+hinge_loss = tf.reduce_sum(tf.maximum(0., 1. - Y*y_))
+cost = tf.add(regularization_loss, tf.multiply(lambd, hinge_loss))
+optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
+cost_history = np.empty(shape=[1],dtype=float)
+
 
 def run_train(session, train_x, train_y):
-  global training_step
+  global optimizer
   global cost
   global X
   global Y
   global training_epochs
   global cost_history
-  global learning_rate
 
   for epoch in range(training_epochs):
-    session.run(training_step,feed_dict={X:train_x,Y:train_y})
+    session.run(optimizer,feed_dict={X:train_x,Y:train_y})
     cost_history = np.append(cost_history,session.run(cost,feed_dict={X: train_x,Y: train_y}))
 
 def cross_validate(session, split_size=5):
   global train_x
   global train_y
+  global y_
   global X
   global Y
 
   results = []
-  kf = KFold(n_splits=split_size)
+  kf = KFold(n_splits=split_size, shuffle=True)
   for train_idx, val_idx in kf.split(train_x, train_y):
     _train_x = train_x[train_idx]
     _train_y = train_y[train_idx]
     val_x = train_x[val_idx]
     val_y = train_y[val_idx]
     run_train(session, _train_x, _train_y)
-    pred_y = session.run(y_, feed_dict={X: val_x})
-    mse = tf.reduce_mean(tf.square(pred_y - val_y))
-    results.append(session.run(mse, feed_dict={X: val_x, Y: val_y}))
+
+    predicted_class = tf.sign(y_)
+    correct_prediction = tf.equal(Y, predicted_class)
+
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    results.append(session.run(accuracy, feed_dict={X: val_x, Y: val_y}))
   return results
 
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
   result = cross_validate(session)
   print("Cross-validation result: %s" % result)
-  pred_y = session.run(y_, feed_dict={X: test_x})
-  mse = tf.reduce_mean(tf.square(pred_y - test_y))
-  rmse = tf.sqrt(tf.reduce_mean(tf.square(pred_y - test_y)))
-  print("Test rmse: %f" % session.run(rmse, feed_dict={X: test_x, Y: test_y}))
-  # squared_difference
 
-  fig, ax = plt.subplots()
-  ax.scatter(test_y, pred_y)
-  ax.plot([test_y.min(), test_y.max()], [test_y.min(), test_y.max()], 'k--', lw=3)
-  ax.set_xlabel('Measured')
-  ax.set_ylabel('Predicted')
-  fig.savefig('pred.png')
+  predicted_class = tf.sign(y_)
+  correct_prediction = tf.equal(Y, predicted_class)
+  accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+
+  print("Test accuracy: %f" % session.run(accuracy, feed_dict={X: test_x, Y: test_y}))
+
