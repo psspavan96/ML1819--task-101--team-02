@@ -5,14 +5,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("../../dataset.preprocessed/carinsurance/cleaned_train.csv", index_col=0)
-df = df.drop('Id', axis=1)
+df = pd.read_csv("../../dataset.preprocessed/carinsurance/cleaned.csv", index_col=0)
 
 g = sns.lmplot(x="NoOfContacts", y="LastContactDay", data=df)
 g.savefig('noofcontacts-lastcontactday.png')
 
-g = sns.catplot(x="CarInsurance", y="CallDurationMinutes", data=df)
-g.savefig('calldurationminutes-carinsurance.png')
+g = sns.catplot(x="CarLoan", y="Balance", data=df)
+g.savefig('carloan-balance.png')
 
 #df = df.drop('', axis=1)
 corr = df.corr()
