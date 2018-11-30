@@ -102,4 +102,4 @@ with tf.Session() as session:
   ax.plot([test_y.min(), test_y.max()], [test_y.min(), test_y.max()], 'k--', lw=3)
   ax.set_xlabel('Measured')
   ax.set_ylabel('Predicted')
-  fig.savefig('pred.png')
+  fig.savefig('googleplay_pred.png')
