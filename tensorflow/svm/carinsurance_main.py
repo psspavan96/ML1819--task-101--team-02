@@ -13,8 +13,8 @@ def read_dataset(filePath,delimiter=','):
   data = genfromtxt(filePath, delimiter=delimiter)
   data = np.delete(data, (0), axis=0)
   data = np.delete(data, (0), axis=1)
-  labels = data[:,8] # Carloan as y
-  features = data[:, [6]] # Balance as x
+  labels = data[:,7] # Carloan as y
+  features = data[:, [5]] # Balance as x
   return features, labels
 
 def feature_normalize(dataset):
@@ -29,20 +29,17 @@ def append_bias_reshape(features,labels):
   l = np.reshape(labels,[n_training_samples,1])
   return f, l
 
-features,labels = read_dataset('../../dataset.preprocessed/carinsurance/cleaned_train.csv')
+features,labels = read_dataset('../../dataset.preprocessed/carinsurance/cleaned.csv')
 normalized_features = feature_normalize(features)
 f, l = append_bias_reshape(normalized_features,labels)
 n_dim = f.shape[1]
 
-train_x = f
-train_y = l
+rnd_indices = np.random.rand(len(f)) < 0.70
 
-features,labels = read_dataset('../../dataset.preprocessed/carinsurance/cleaned_test.csv')
-normalized_features = feature_normalize(features)
-f, l = append_bias_reshape(normalized_features,labels)
-n_dim = f.shape[1]
-test_x = f
-test_y = l
+train_x = f[rnd_indices]
+train_y = l[rnd_indices]
+test_x = f[~rnd_indices]
+test_y = l[~rnd_indices]
 
 learning_rate = 0.01
 lambd = tf.constant([0.01])
