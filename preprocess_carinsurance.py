@@ -22,8 +22,12 @@ from sklearn import svm,tree
 # In[2]:
 
 
-df = pd.read_csv("./dataset.orig/carinsurance/carInsurance_train.csv")
+df_train = pd.read_csv("./dataset.orig/carinsurance/carInsurance_train.csv")
 df_test = pd.read_csv("./dataset.orig/carinsurance/carInsurance_test.csv")
+
+df = pd.concat([df_train, df_test], ignore_index=True)
+df = df.drop('CarInsurance', axis=1)
+df = df.drop('Id', axis=1)
 print("Number of data points:",df.shape[0])
 
 
@@ -62,8 +66,6 @@ df.describe(include=['O'])
 
 
 sns.boxplot(x='Balance',data=df,palette='hls')
-plt.clf()
-sns.boxplot(x='Balance',data=df_test,palette='hls')
 
 # In[9]:
 
@@ -76,8 +78,6 @@ df_test.Balance.max()
 
 # removing outliers
 df[df['Balance'] == 98417]
-
-df_test[df_test['Balance'] == 41630]
 
 # In[11]:
 
@@ -97,10 +97,7 @@ df_test_new.isnull().sum()
 
 
 df_new['Job'] = df_new['Job'].fillna(method ='pad')
-df_new['Education'] = df_new['Education'].fillna(method ='pad')
-
 df_test_new['Job'] = df_test_new['Job'].fillna(method ='pad')
-df_test_new['Education'] = df_test_new['Education'].fillna(method ='pad')
 
 
 # In[14]:
@@ -111,9 +108,6 @@ df_new['Communication'] = df_new['Communication'].fillna('none')
 df_new['Outcome'] = df_new['Outcome'].fillna('none')
 df_new['CallDurationMinutes'] = (pd.to_datetime(df_new['CallEnd']) - pd.to_datetime(df_new['CallStart'])).astype('timedelta64[m]')
 
-df_test_new['Communication'] = df_test_new['Communication'].fillna('none')
-df_test_new['Outcome'] = df_test_new['Outcome'].fillna('none')
-df_test_new['CallDurationMinutes'] = (pd.to_datetime(df_test_new['CallEnd']) - pd.to_datetime(df_test_new['CallStart'])).astype('timedelta64[m]')
 
 
 # In[15]:
@@ -133,9 +127,7 @@ df_test_new.head()
 # In[18]:
 
 
-df_new.to_csv("./dataset.preprocessed/carinsurance/cleaned_train.csv")
-df_test_new.to_csv("./dataset.preprocessed/carinsurance/cleaned_test.csv")
-
+df_new.to_csv("./dataset.preprocessed/carinsurance/cleaned.csv")
 
 # In[ ]:
 
