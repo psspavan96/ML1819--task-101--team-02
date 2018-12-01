@@ -130,8 +130,9 @@ public class SVMWeka {
 		 */
 		SMO smo = new SMO();
 		smo.buildClassifier(dataset);
-		Evaluation svmregeval = new Evaluation(dataset);
-		svmregeval.evaluateModel(smo, dataset);
-		System.out.println(svmregeval.toSummaryString());
+		Evaluation svm = new Evaluation(dataset);
+		svm.evaluateModel(smo, dataset);
+		svm.crossValidateModel(smo, dataset, 10, new Random(1));
+		System.out.println(svm.toSummaryString());
 	}
 }
