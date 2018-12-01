@@ -16,6 +16,7 @@ public class KNNWeka2 {
 		 * KNN model
 		 */
 		IBk ibk = new IBk();
+		ibk.setKNN(4);
 		ibk.buildClassifier(dataset);
 		Evaluation knn = new Evaluation(dataset);
 		knn.evaluateModel(ibk, dataset);

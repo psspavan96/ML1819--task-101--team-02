@@ -18,6 +18,7 @@ public class KNNWeka {
 		 */
 		IBk ibk = new IBk();
 		ibk.buildClassifier(dataset);
+		ibk.setKNN(4);
 		Evaluation knn = new Evaluation(dataset);
 		knn.evaluateModel(ibk, dataset);
 		knn.crossValidateModel(ibk, dataset, 10, new Random(1));
