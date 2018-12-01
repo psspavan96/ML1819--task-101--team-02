@@ -70,7 +70,7 @@ del df["Category"]
 
 
 from sklearn.model_selection import train_test_split
-X = df.drop(["Rated 4.4 or more"],axis=1)
+X = df[['Reviews']]
 y = df["Rated 4.4 or more"]
 y[y == -1] =0
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
