@@ -12,12 +12,13 @@ from sklearn.model_selection import KFold
 def read_dataset(filePath,delimiter=','):
   data = genfromtxt(filePath, delimiter=delimiter)
   data = np.delete(data, (0), axis=0)
-  data = np.delete(data, (0, 9), axis=1)
-  labels = data[:,0] # category as y
-  features = data[:, [2,3,7]] # reviews, size, genre as x
+  data = np.delete(data, (0), axis=1)
+  labels = data[:,2] # Marital as y
+  features = data[:, [0,5,11,17]] # Age, Balance, NoOfContacts, CallDurationMinutes as x
   return features, labels
 
 def feature_normalize(dataset):
+  dataset = dataset
   mu = np.mean(dataset,axis=0)
   sigma = np.std(dataset,axis=0)
   return (dataset - mu)/sigma
@@ -29,7 +30,7 @@ def append_bias_reshape(features,labels):
   l = np.reshape(labels,[n_training_samples,1])
   return f, l
 
-features,labels = read_dataset('../../dataset.preprocessed/googleplay/cleaned.csv')
+features,labels = read_dataset('../../dataset.preprocessed/carinsurance/cleaned.csv')
 normalized_features = feature_normalize(features)
 f, l = append_bias_reshape(normalized_features,labels)
 n_dim = f.shape[1]
@@ -69,7 +70,7 @@ rmse = tf.sqrt(tf.reduce_mean(tf.square(tf.subtract(prediction, Y_target_test)))
 
 
 # Calculate how many loops over training data
-num_loops = int(np.ceil(len(test_x)/batch_size))
+num_loops = int(np.ceil(len(test_x)/batch_size)) 
 
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
