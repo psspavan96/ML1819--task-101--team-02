@@ -71,7 +71,6 @@ sns.boxplot(x='Balance',data=df,palette='hls')
 
 
 df.Balance.max()
-df_test.Balance.max()
 
 
 # In[10]:
@@ -83,22 +82,19 @@ df[df['Balance'] == 98417]
 
 
 df_new = df.drop(df.index[1742])
-df_test_new = df_test.drop(df.index[602])
 
 
 # In[12]:
 
 
 df_new.isnull().sum()
-df_test_new.isnull().sum()
 
 
 # In[13]:
 
 
 df_new['Job'] = df_new['Job'].fillna(method ='pad')
-df_test_new['Job'] = df_test_new['Job'].fillna(method ='pad')
-
+df_new['Education'] = df_new['Education'].fillna(method ='pad')
 
 # In[14]:
 
@@ -114,17 +110,33 @@ df_new['CallDurationMinutes'] = (pd.to_datetime(df_new['CallEnd']) - pd.to_datet
 
 
 df_new.isnull().sum()
-df_test_new.isnull().sum()
 
 
 # In[16]:
 
 
 df_new.head()
-df_test_new.head()
 
 
 # In[18]:
+
+df_new['Job'] = df_new['Job'].astype('category')
+df_new['Job'] = df_new['Job'].cat.codes
+
+df_new['Marital'] = df_new['Marital'].astype('category')
+df_new['Marital'] = df_new['Marital'].cat.codes
+
+df_new['Education'] = df_new['Education'].astype('category')
+df_new['Education'] = df_new['Education'].cat.codes
+
+df_new['Communication'] = df_new['Communication'].astype('category')
+df_new['Communication'] = df_new['Communication'].cat.codes
+
+df_new['LastContactMonth'] = df_new['LastContactMonth'].astype('category')
+df_new['LastContactMonth'] = df_new['LastContactMonth'].cat.codes
+
+df_new['Outcome'] = df_new['Outcome'].astype('category')
+df_new['Outcome'] = df_new['Outcome'].cat.codes
 
 
 df_new.to_csv("./dataset.preprocessed/carinsurance/cleaned.csv")
