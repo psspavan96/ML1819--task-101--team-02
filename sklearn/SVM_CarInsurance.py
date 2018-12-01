@@ -77,10 +77,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffl
 # In[9]:
 
 
-print(X_train.shape)
-print(X_test.shape)
-print(y_train.shape)
-print(y_test.shape)
+# print(X_train.shape)
+# print(X_test.shape)
+# print(y_train.shape)
+# print(y_test.shape)
+
+import warnings
+warnings.filterwarnings("ignore")
+from sklearn import preprocessing
+min_max_scaler = preprocessing.MinMaxScaler()
+X_train_scaled = min_max_scaler.fit_transform(X_train)
+X_test_scaled = min_max_scaler.fit_transform(X_test)
 
 
 # In[10]:
@@ -110,8 +117,8 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
 import seaborn as sn
 clf = SVC()
-clf.fit(X_train,y_train)
-y_pred = clf.predict(X_test)
+clf.fit(X_train_scaled,y_train)
+y_pred = clf.predict(X_test_scaled)
 # print(y_pred)
 print("Accuracy on test set: %0.3f"%(accuracy_score(y_test, y_pred)))
 print("F1-Score on test set: %0.2f"%(f1_score(y_test, y_pred, labels=None, pos_label=1, average='macro', sample_weight=None)))
