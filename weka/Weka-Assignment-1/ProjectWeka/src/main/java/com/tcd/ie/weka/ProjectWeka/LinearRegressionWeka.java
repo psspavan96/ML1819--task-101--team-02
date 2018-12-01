@@ -132,9 +132,9 @@ public class LinearRegressionWeka {
 		//System.out.println(lr);
 		Evaluation lreval = new Evaluation(dataset);
 		lreval.evaluateModel(lr, dataset);
-		System.out.println(lreval.toSummaryString());
-		/*System.out.println("cross-validate");
+		//System.out.println(lreval.toSummaryString());
+		
 		lreval.crossValidateModel(lr, dataset, 10, new Random(1));
-		System.out.println(lreval.toSummaryString());*/
+		System.out.println(lreval.toSummaryString());
 	}
 }
