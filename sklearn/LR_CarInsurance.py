@@ -35,13 +35,13 @@ df.shape
 # In[4]:
 
 
-df.head()
+# df.head()
 
 
 # In[5]:
 
 
-df.info()
+# df.info()
 
 
 # In[9]:
@@ -67,7 +67,7 @@ del df['CallDurationMinutes']
 # In[10]:
 
 
-df.head()
+# df.head()
 
 
 # In[12]:
@@ -79,7 +79,7 @@ del df['Unnamed: 0']
 # In[13]:
 
 
-df.head()
+# df.head()
 
 
 # In[14]:
@@ -89,10 +89,10 @@ from sklearn.model_selection import train_test_split
 X = df[['NoOfContacts']]
 Y = df['LastContactDay']
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 5)
-print(X_train.shape)
-print(X_test.shape)
-print(Y_train.shape)
-print(Y_test.shape)
+# print(X_train.shape)
+# print(X_test.shape)
+# print(Y_train.shape)
+# print(Y_test.shape)
 
 
 # In[15]:
@@ -149,7 +149,7 @@ from sklearn.metrics import mean_squared_error
 from math import sqrt
 
 rms = sqrt(mean_squared_error(Y_test, y_pred))
-print(rms)
+print("RMSE: ", rms)
 
 
 # In[24]:
@@ -157,7 +157,7 @@ print(rms)
 
 from sklearn.metrics import mean_absolute_error
 mae = mean_absolute_error(Y_test,y_pred)
-print(mae)
+print("MAE: ", mae)
 
 
 # In[ ]:
