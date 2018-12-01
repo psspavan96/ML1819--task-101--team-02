@@ -64,9 +64,9 @@ df
 
 
 from sklearn.model_selection import train_test_split
-X = df.drop(["Category"],axis=1)
+X = df[['Reviews', 'Size', 'Genres']]
 y = df.Category
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=True)
 
 
 # In[102]:
@@ -93,25 +93,25 @@ X_test_scaled = min_max_scaler.fit_transform(X_test)
 # In[104]:
 
 
-lab_enc = preprocessing.LabelEncoder()
-y_train_enc = lab_enc.fit_transform(y_train)
-from sklearn.model_selection import GridSearchCV
-from sklearn.neighbors import KNeighborsClassifier
-import warnings
-warnings.filterwarnings("ignore")
-#using KD-tree
-knn = KNeighborsClassifier(algorithm='auto')
-param_grid = {'n_neighbors':np.arange(1,100,2)} #params we need to try on classifier
-gscv = GridSearchCV(knn,param_grid,verbose=1)
-gscv.fit(X_train_scaled,y_train_enc)
-print("Best HyperParameter: ",gscv.best_params_)
-print("Best Accuracy: %.2f%%"%(gscv.best_score_*100))
+# lab_enc = preprocessing.LabelEncoder()
+# y_train_enc = lab_enc.fit_transform(y_train)
+# from sklearn.model_selection import GridSearchCV
+# from sklearn.neighbors import KNeighborsClassifier
+# import warnings
+# warnings.filterwarnings("ignore")
+# #using KD-tree
+# knn = KNeighborsClassifier(algorithm='auto')
+# param_grid = {'n_neighbors':np.arange(1,100,2)} #params we need to try on classifier
+# gscv = GridSearchCV(knn,param_grid,verbose=1)
+# gscv.fit(X_train_scaled,y_train_enc)
+# print("Best HyperParameter: ",gscv.best_params_)
+# print("Best Accuracy: %.2f%%"%(gscv.best_score_*100))
 
 
 # In[105]:
 
 
-y_test = lab_enc.fit_transform(y_test)
+# y_test = lab_enc.fit_transform(y_test)
 
 
 # In[107]:
@@ -123,8 +123,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn import metrics
 import seaborn as sn
 
-knen = KNeighborsClassifier(n_neighbors=1,algorithm='auto')
-knen.fit(X_train_scaled,y_train_enc)
+knen = KNeighborsClassifier(n_neighbors=4,algorithm='auto')
+knen.fit(X_train_scaled,y_train)
 y_pred = knen.predict(X_test_scaled)
 # print(y_pred)
 print("Accuracy on test set: %0.2f%%"%(accuracy_score(y_test, y_pred)*100))

@@ -1,8 +1,3 @@
-Fitting 3 folds for each of 50 candidates, totalling 150 fits
-[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-[Parallel(n_jobs=1)]: Done 150 out of 150 | elapsed:   20.4s finished
-Best HyperParameter:  {'n_neighbors': 1}
-Best Accuracy: 85.11%
-Accuracy on test set: 70.60%
-Mse:  3.508185053380783
-Rmse:  1.8730149634695348
+Accuracy on test set: 70.28%
+Mse:  3.9619217081850535
+Rmse:  1.9904576629973956
