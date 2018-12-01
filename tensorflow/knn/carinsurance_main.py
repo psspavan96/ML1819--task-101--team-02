@@ -12,12 +12,13 @@ from sklearn.model_selection import KFold
 def read_dataset(filePath,delimiter=','):
   data = genfromtxt(filePath, delimiter=delimiter)
   data = np.delete(data, (0), axis=0)
-  data = np.delete(data, (0, 9), axis=1)
+  data = np.delete(data, (0), axis=1)
   labels = data[:,2] # Marital as y
-  features = data[:, [5,11,16]] # Balance, NoOfContacts, CallDurationMinutes as x
+  features = data[:, [0,5,11,17]] # Age, Balance, NoOfContacts, CallDurationMinutes as x
   return features, labels
 
 def feature_normalize(dataset):
+  dataset = dataset
   mu = np.mean(dataset,axis=0)
   sigma = np.std(dataset,axis=0)
   return (dataset - mu)/sigma
@@ -69,7 +70,7 @@ rmse = tf.sqrt(tf.reduce_mean(tf.square(tf.subtract(prediction, Y_target_test)))
 
 
 # Calculate how many loops over training data
-num_loops = int(np.ceil(len(test_x)/batch_size)) # essentially 1 loop
+num_loops = int(np.ceil(len(test_x)/batch_size)) 
 
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
@@ -85,7 +86,6 @@ with tf.Session() as session:
     predictions = session.run(prediction, feed_dict={X_data_train: train_x, X_data_test: batch_x,
       Y_target_train: train_y, Y_target_test: batch_y})
 
-    print (predictions)
     batch_rmse = session.run(rmse, feed_dict={X_data_train: train_x, X_data_test: batch_x,
       Y_target_train: train_y, Y_target_test: batch_y})
 

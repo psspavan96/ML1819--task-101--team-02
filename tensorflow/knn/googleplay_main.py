@@ -69,7 +69,7 @@ rmse = tf.sqrt(tf.reduce_mean(tf.square(tf.subtract(prediction, Y_target_test)))
 
 
 # Calculate how many loops over training data
-num_loops = int(np.ceil(len(test_x)/batch_size)) # essentially 1 loop
+num_loops = int(np.ceil(len(test_x)/batch_size))
 
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
