@@ -1,5 +1,7 @@
 package com.tcd.ie.weka.ProjectWeka;
 
+import java.util.Random;
+
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.lazy.IBk;
@@ -16,8 +18,10 @@ public class KNNWeka {
 		 */
 		IBk ibk = new IBk();
 		ibk.buildClassifier(dataset);
-		Evaluation svmregeval = new Evaluation(dataset);
-		svmregeval.evaluateModel(ibk, dataset);
-		System.out.println(svmregeval.toSummaryString());
+		ibk.setKNN(4);
+		Evaluation knn = new Evaluation(dataset);
+		knn.evaluateModel(ibk, dataset);
+		knn.crossValidateModel(ibk, dataset, 10, new Random(1));
+		System.out.println(knn.toSummaryString());
 	}
 }
