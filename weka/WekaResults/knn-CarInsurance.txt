@@ -1,0 +1,31 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 4 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     knn
+Instances:    4999
+Attributes:   5
+              Marital
+              Age
+              Balance
+              NoOfContacts
+              CallDurationMinutes
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 4 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0.02 seconds
+
+=== Cross-validation ===
+=== Summary ===
+
+Correlation coefficient                  0.3557
+Mean absolute error                      0.4541
+Root mean squared error                  0.6086
+Relative absolute error                 91.9943 %
+Root relative squared error             97.9225 %
+Total Number of Instances             4999     
+
