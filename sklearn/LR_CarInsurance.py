@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import itertools
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline')
 from sklearn.model_selection import train_test_split,cross_val_score,KFold,cross_val_predict
 from sklearn.metrics import accuracy_score, classification_report, precision_score, recall_score,confusion_matrix,precision_recall_curve,roc_curve
 from sklearn.feature_selection import RFE
@@ -22,7 +22,7 @@ from sklearn import svm,tree
 # In[2]:
 
 
-df = pd.read_csv("/Users/pavanpss/Desktop/cleandata.csv")
+df = pd.read_csv("../dataset.preprocessed/carinsurance/cleaned.csv")
 print("Number of data points:",df.shape[0])
 
 
@@ -86,7 +86,7 @@ df.head()
 
 
 from sklearn.model_selection import train_test_split
-X = df.drop('LastContactDay', axis = 1)
+X = df[['NoOfContacts']]
 Y = df['LastContactDay']
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 5)
 print(X_train.shape)
