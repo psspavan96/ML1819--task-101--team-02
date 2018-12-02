@@ -81,7 +81,7 @@ def cross_validate(session, split_size=5):
   global Y
 
   results = []
-  kf = KFold(n_splits=split_size)
+  kf = KFold(n_splits=split_size, shuffle=True)
   for train_idx, val_idx in kf.split(train_x, train_y):
     _train_x = train_x[train_idx]
     _train_y = train_y[train_idx]
