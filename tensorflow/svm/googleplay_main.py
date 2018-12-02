@@ -49,10 +49,11 @@ cost_history = np.empty(shape=[1],dtype=float)
 X = tf.placeholder(tf.float32,[None,n_dim])
 Y = tf.placeholder(tf.float32,[None,1])
 W = tf.Variable(tf.ones([n_dim,1]))
-
+b = tf.Variable(tf.zeros([1]))
 
 # SVM
-y_ = tf.nn.softmax(tf.matmul(X,W))
+# y_ = tf.nn.softmax(tf.matmul(X,W))
+y_ = tf.matmul(X,W) + b
 regularization_loss = 0.5*tf.reduce_sum(tf.square(W))
 hinge_loss = tf.reduce_sum(tf.maximum(0., 1. - Y*y_))
 cost = tf.add(regularization_loss, tf.multiply(lambd, hinge_loss))
