@@ -1,2 +1,2 @@
-Cross-validation result: [0.5083969, 0.47099236, 0.40687022, 0.42519084, 0.36363637]
-Test accuracy: 0.431310
+Cross-validation result: [0.5072464, 0.54996186, 0.6056445, 0.58504957, 0.63081616]
+Test accuracy: 0.584845
