@@ -1,20 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import numpy as np
 import pandas as pd
-import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
-from subprocess import check_output
-import plotly.offline as py
-import plotly.graph_objs as go
-import plotly.tools as tls
-import os
-import gc
-import re
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from bs4 import BeautifulSoup
+import seaborn as sns
+import itertools
+from sklearn.model_selection import train_test_split,cross_val_score,KFold,cross_val_predict
+from sklearn.metrics import accuracy_score, classification_report, precision_score, recall_score,confusion_matrix,precision_recall_curve,roc_curve
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import ExtraTreesClassifier,RandomForestClassifier,AdaBoostClassifier,GradientBoostingClassifier
+from sklearn.neighbors  import KNeighborsClassifier
+from sklearn import svm,tree
+from sklearn.model_selection import train_test_split
 import warnings
 from sklearn import preprocessing
 from sklearn.svm import SVC
@@ -25,17 +24,14 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
 import seaborn as sn
 from sklearn.model_selection import KFold
-from sklearn.model_selection import train_test_split
 
 warnings.filterwarnings("ignore")
 
-df = pd.read_csv("../dataset.preprocessed/googleplay/cleaned.csv")
+df = pd.read_csv("../dataset.preprocessed/carinsurance/cleaned.csv")
 print("Number of data points:",df.shape[0])
-
-X = df[['Reviews']]
-y = df["Rated 4.4 or more"]
-y[y == -1] =0
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+X = df[['Balance']]
+y = df["CarLoan"]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=True)
 
 min_max_scaler = preprocessing.MinMaxScaler()
 X_train_scaled = min_max_scaler.fit_transform(X_train)
