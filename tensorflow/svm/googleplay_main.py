@@ -73,7 +73,7 @@ def run_train(session, train_x, train_y):
     session.run(optimizer,feed_dict={X:train_x,Y:train_y})
     cost_history = np.append(cost_history,session.run(cost,feed_dict={X: train_x,Y: train_y}))
 
-def cross_validate(session, split_size=5):
+def cross_validate(session, split_size=10):
   global train_x
   global train_y
   global y_
