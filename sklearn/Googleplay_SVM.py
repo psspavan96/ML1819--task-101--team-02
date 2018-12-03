@@ -125,12 +125,17 @@ from sklearn.metrics import precision_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
 import seaborn as sn
-# y_test = lab_enc.fit_transform(y_test)
+from sklearn.model_selection import KFold
 clf = SVC()
-clf.fit(X_train_scaled,y_train)
+
+kf = KFold(n_splits=10,shuffle=False)
+for train_idx, test_idx in kf.split(X_train_scaled,y_train):
+  _x_train = X_train_scaled[train_idx]
+  _y_train = y_train.values[train_idx]
+  clf.fit(_x_train,_y_train)
+
 y_pred = clf.predict(X_test_scaled)
-# print(y_pred)
-print("Accuracy on test set: %0.3f%%"%(accuracy_score(y_test, y_pred)*100))
+print("Accuracy on test set: %0.3f"%(accuracy_score(y_test, y_pred)))
 print("F1-Score on test set: %0.2f"%(f1_score(y_test, y_pred, labels=None, pos_label=1, average='macro', sample_weight=None)))
 
 

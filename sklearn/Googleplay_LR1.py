@@ -193,9 +193,15 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3)
 
 from sklearn.linear_model import LinearRegression
 from matplotlib import *
+from sklearn.model_selection import KFold
 
 lm = LinearRegression()
-lm.fit(X_train, Y_train)
+
+kf = KFold(n_splits=10,shuffle=False)
+for train_idx, test_idx in kf.split(X_train, Y_train):
+  _x_train = X_train.values[train_idx]
+  _y_train = Y_train.values[train_idx]
+  lm.fit(X_train, Y_train)
 
 lm.score(X_test, Y_test)
 
