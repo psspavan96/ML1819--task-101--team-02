@@ -125,7 +125,6 @@ for train_idx, test_idx in kf.split(X_train_scaled,y_train):
   _y_train = y_train.values[train_idx]
   clf.fit(_x_train,_y_train)
 
-clf.fit(X_train_scaled,y_train)
 y_pred = clf.predict(X_test_scaled)
 # print(y_pred)
 print("Accuracy on test set: %0.3f"%(accuracy_score(y_test, y_pred)))
