@@ -42,7 +42,7 @@ X_test_scaled = min_max_scaler.fit_transform(X_test)
 knen = KNeighborsClassifier(n_neighbors=4,algorithm='auto')
 knen.fit(X_train_scaled,y_train)
 y_pred = knen.predict(X_test_scaled)
-print("Accuracy on test set: %0.2f%%"%(accuracy_score(y_test, y_pred)*100))
+print("Accuracy on test set: ", (accuracy_score(y_test, y_pred)))
 
 mse = mean_squared_error(y_test, y_pred)
 print("Mse: ", mse)

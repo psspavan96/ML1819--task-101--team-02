@@ -1,3 +1,4 @@
-Accuracy on test set: 70.28%
-Mse:  3.9619217081850535
-Rmse:  1.9904576629973956
+Number of data points: 9366
+Accuracy on test set:  0.7202846975088968
+Mse:  4.087900355871886
+Rmse:  2.0218556713751568

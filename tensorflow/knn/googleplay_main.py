@@ -74,7 +74,8 @@ num_loops = int(np.ceil(len(test_x)/batch_size))
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
 
-  results = []
+  accuracy_list = []
+  batch_rmse_list = []
   for i in range(num_loops):
     min_index = i*batch_size
     max_index = min((i+1)*batch_size,len(train_x))
@@ -88,7 +89,17 @@ with tf.Session() as session:
     batch_rmse = session.run(rmse, feed_dict={X_data_train: train_x, X_data_test: batch_x,
       Y_target_train: train_y, Y_target_test: batch_y})
 
-    results.append(batch_rmse)
+    accurate_predictions = 0
+    for pred, actual in zip(predictions, batch_y):
+      if round(pred[0],0) == actual[0]:
+        accurate_predictions += 1
+    accuracy = accurate_predictions/len(predictions)
 
-  avg_rmse = sum(results)/len(results)
+    batch_rmse_list.append(batch_rmse)
+    accuracy_list.append(accuracy)
+
+  avg_rmse = sum(batch_rmse_list)/len(batch_rmse_list)
   print("Rmse: %s" % avg_rmse)
+
+  avg_accuracy = sum(accuracy_list)/len(accuracy_list)
+  print("Accuracy: %s" % avg_accuracy)
