@@ -1,3 +1,0 @@
-INDEX VERSION 1.130+E:\MyTrinity\NewML\.metadata\.plugins\org.eclipse.jdt.core
-1035543632.index
-4119932590.index
