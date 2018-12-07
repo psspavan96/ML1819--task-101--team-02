@@ -35,7 +35,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 knen = KNeighborsClassifier(n_neighbors=4,algorithm='auto')
 knen.fit(X_train,y_train)
 y_pred = knen.predict(X_test)
-print("Accuracy on test set: %0.2f%%"%(accuracy_score(y_test, y_pred)*100))
+print("Accuracy on test set: ", (accuracy_score(y_test, y_pred)))
 
 rms = sqrt(mean_squared_error(y_test, y_pred))
 print("RSME: ", rms)
