@@ -90,11 +90,12 @@ def cross_validate(session, split_size=10):
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
   result = cross_validate(session)
-  print("Cross-validation result: %s" % result)
+  # print("Cross-validation result: %s" % result)
   pred_y = session.run(y_, feed_dict={X: test_x})
   mse = tf.reduce_mean(tf.square(pred_y - test_y))
   rmse = tf.sqrt(tf.reduce_mean(tf.square(pred_y - test_y)))
-  print("Test rmse: %f" % session.run(rmse, feed_dict={X: test_x, Y: test_y}))
+  # print("Test rmse: %f" % session.run(rmse, feed_dict={X: test_x, Y: test_y}))
+  print("rmse,%f" % session.run(rmse, feed_dict={X: test_x, Y: test_y}))
   # squared_difference
 
   fig, ax = plt.subplots()

@@ -1,3 +1,10 @@
-Number of data points: 4999
-Accuracy on test set: 0.878
-F1-Score on test set: 0.47
+0.866
+0.863
+0.872
+0.861
+0.865
+0.867
+0.880
+0.879
+0.877
+0.866

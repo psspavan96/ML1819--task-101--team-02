@@ -25,7 +25,7 @@ from math import sqrt
 warnings.filterwarnings("ignore")
 
 df = pd.read_csv("../dataset.preprocessed/carinsurance/cleaned.csv")
-print("Number of data points:",df.shape[0])
+# print("Number of data points:",df.shape[0])
 
 X = df[['Age', 'Balance', 'NoOfContacts', 'CallDurationMinutes']]
 y = df[['Marital']]
@@ -35,9 +35,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 knen = KNeighborsClassifier(n_neighbors=4,algorithm='auto')
 knen.fit(X_train,y_train)
 y_pred = knen.predict(X_test)
-print("Accuracy on test set: ", (accuracy_score(y_test, y_pred)))
+# print("Accuracy on test set: ", (accuracy_score(y_test, y_pred)))
+print("accuracy,", (accuracy_score(y_test, y_pred)))
 
 rms = sqrt(mean_squared_error(y_test, y_pred))
-print("RSME: ", rms)
+# print("RSME: ", rms)
 mse = mean_squared_error(y_test, y_pred)
-print("MSE: ", mse)
+# print("MSE: ", mse)

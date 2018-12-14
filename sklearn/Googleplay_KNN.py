@@ -28,7 +28,7 @@ from math import sqrt
 warnings.filterwarnings("ignore")
 
 df = pd.read_csv("../dataset.preprocessed/googleplay/cleaned.csv")
-print("Number of data points:",df.shape[0])
+# print("Number of data points:",df.shape[0])
 
 from sklearn.model_selection import train_test_split
 X = df[['Reviews', 'Size', 'Genres']]
@@ -42,10 +42,11 @@ X_test_scaled = min_max_scaler.fit_transform(X_test)
 knen = KNeighborsClassifier(n_neighbors=4,algorithm='auto')
 knen.fit(X_train_scaled,y_train)
 y_pred = knen.predict(X_test_scaled)
-print("Accuracy on test set: ", (accuracy_score(y_test, y_pred)))
+# print("Accuracy on test set: ", (accuracy_score(y_test, y_pred)))
+print("accuracy,", (accuracy_score(y_test, y_pred)))
 
 mse = mean_squared_error(y_test, y_pred)
-print("Mse: ", mse)
+# print("Mse: ", mse)
 rms = sqrt(mse)
-print("Rmse: ", rms)
+# print("Rmse: ", rms)
 

@@ -30,7 +30,7 @@ from sklearn.model_selection import train_test_split
 warnings.filterwarnings("ignore")
 
 df = pd.read_csv("../dataset.preprocessed/googleplay/cleaned.csv")
-print("Number of data points:",df.shape[0])
+# print("Number of data points:",df.shape[0])
 
 X = df[['Reviews']]
 y = df["Rated 4.4 or more"]
@@ -50,5 +50,6 @@ for train_idx, test_idx in kf.split(X_train_scaled,y_train):
   clf.fit(_x_train,_y_train)
 
 y_pred = clf.predict(X_test_scaled)
-print("Accuracy on test set: %0.3f"%(accuracy_score(y_test, y_pred)))
-print("F1-Score on test set: %0.2f"%(f1_score(y_test, y_pred, labels=None, pos_label=1, average='macro', sample_weight=None)))
+# print("Accuracy on test set: %0.3f"%(accuracy_score(y_test, y_pred)))
+print("accuracy,%0.3f"%(accuracy_score(y_test, y_pred)))
+# print("F1-Score on test set: %0.2f"%(f1_score(y_test, y_pred, labels=None, pos_label=1, average='macro', sample_weight=None)))

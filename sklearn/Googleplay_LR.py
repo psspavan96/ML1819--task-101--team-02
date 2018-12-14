@@ -25,7 +25,7 @@ from math import sqrt
 
 
 df = pd.read_csv("../dataset.preprocessed/googleplay/cleaned.csv")
-print("Number of data points:",df.shape[0])
+# print("Number of data points:",df.shape[0])
 
 X = df[['Reviews']]
 Y = df['Rating']
@@ -54,12 +54,13 @@ plt.show()
 
 
 mse = mean_squared_error(Y_test, y_pred)
-print("Mean squared error: %.2f"% mse)
+# print("Mean squared error: %.2f"% mse)
 # Explained variance score: 1 is perfect prediction
-print('Variance score: %.2f' % r2_score(Y_test, y_pred))
+# print('Variance score: %.2f' % r2_score(Y_test, y_pred))
 
 rms = sqrt(mse)
-print("Rmse: ", rms)
+# print("Rmse: ", rms)
+print("rmse,", rms)
 
 mae = mean_absolute_error(Y_test,y_pred)
-print("Mae: ", mae)
+# print("Mae: ", mae)
