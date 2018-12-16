@@ -24,7 +24,7 @@ from math import sqrt
 from sklearn.metrics import mean_absolute_error
 
 df = pd.read_csv("../dataset.preprocessed/carinsurance/cleaned.csv")
-print("Number of data points:",df.shape[0])
+# print("Number of data points:",df.shape[0])
 
 X = df[['NoOfContacts']]
 Y = df['LastContactDay']
@@ -52,12 +52,13 @@ y = x
 plt.plot(x, y)
 plt.show()
 
-print("Mean squared error: %.2f"% mean_squared_error(Y_test, y_pred))
+# print("Mean squared error: %.2f"% mean_squared_error(Y_test, y_pred))
 # Explained variance score: 1 is perfect prediction
-print('Variance score: %.2f' % r2_score(Y_test, y_pred))
+# print('Variance score: %.2f' % r2_score(Y_test, y_pred))
 
 rms = sqrt(mean_squared_error(Y_test, y_pred))
-print("RMSE: ", rms)
+# print("RMSE: ", rms)
+print("rmse,", rms)
 
 mae = mean_absolute_error(Y_test,y_pred)
-print("MAE: ", mae)
+# print("MAE: ", mae)

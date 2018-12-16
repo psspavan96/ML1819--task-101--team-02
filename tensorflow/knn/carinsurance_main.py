@@ -100,7 +100,8 @@ with tf.Session() as session:
     accuracy_list.append(accuracy)
 
   avg_rmse = sum(batch_rmse_list)/len(batch_rmse_list)
-  print("Rmse: %s" % avg_rmse)
+  # print("Rmse: %s" % avg_rmse)
 
   avg_accuracy = sum(accuracy_list)/len(accuracy_list)
-  print("Accuracy: %s" % avg_accuracy)
+  # print("Accuracy: %s" % avg_accuracy)
+  print("accuracy,%s" % avg_accuracy)

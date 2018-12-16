@@ -1,4 +1,0 @@
-Mean squared error: 0.27
-Variance score: 0.01
-Rmse:  0.5212623995760866
-Mae:  0.35790024990802927

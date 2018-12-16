@@ -99,11 +99,12 @@ def cross_validate(session, split_size=10):
 with tf.Session() as session:
   session.run(tf.global_variables_initializer())
   result = cross_validate(session)
-  print("Cross-validation result: %s" % result)
+  # print("Cross-validation result: %s" % result)
 
   predicted_class = tf.sign(y_)
   correct_prediction = tf.equal(Y, predicted_class)
   accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-  print("Test accuracy: %f" % session.run(accuracy, feed_dict={X: test_x, Y: test_y}))
+  # print("Test accuracy: %f" % session.run(accuracy, feed_dict={X: test_x, Y: test_y}))
+  print("accuracy,%f" % session.run(accuracy, feed_dict={X: test_x, Y: test_y}))
 
