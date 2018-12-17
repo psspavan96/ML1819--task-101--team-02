@@ -1,14 +1,14 @@
 === Run information ===
 
 Scheme:       weka.classifiers.lazy.IBk -K 4 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
-Relation:     knn
+Relation:     knn-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst-last
 Instances:    4999
 Attributes:   5
-              Marital
               Age
               Balance
               NoOfContacts
               CallDurationMinutes
+              Marital
 Test mode:    10-fold cross-validation
 
 === Classifier model (full training set) ===
@@ -17,15 +17,32 @@ IB1 instance-based classifier
 using 4 nearest neighbour(s) for classification
 
 
-Time taken to build model: 0.02 seconds
+Time taken to build model: 0 seconds
 
-=== Cross-validation ===
+=== Stratified cross-validation ===
 === Summary ===
 
-Correlation coefficient                  0.3557
-Mean absolute error                      0.4541
-Root mean squared error                  0.6086
-Relative absolute error                 91.9943 %
-Root relative squared error             97.9225 %
+Correctly Classified Instances        3031               60.6321 %
+Incorrectly Classified Instances      1968               39.3679 %
+Kappa statistic                          0.1534
+Mean absolute error                      0.3406
+Root mean squared error                  0.4212
+Relative absolute error                 91.4463 %
+Root relative squared error             97.6059 %
 Total Number of Instances             4999     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.009    0.011    0.094      0.009    0.016      -0.007   0.560     0.135     0
+                 0.897    0.776    0.614      0.897    0.729      0.166    0.621     0.667     1
+                 0.282    0.083    0.596      0.282    0.383      0.261    0.717     0.531     2
+Weighted Avg.    0.606    0.476    0.548      0.606    0.540      0.174    0.643     0.563     
+
+=== Confusion Matrix ===
+
+    a    b    c   <-- classified as
+    5  551   32 |    a = 0
+   41 2599  257 |    b = 1
+    7 1080  427 |    c = 2
 

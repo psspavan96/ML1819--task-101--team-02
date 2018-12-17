@@ -13,13 +13,15 @@ Test mode:    10-fold cross-validation
 === Classifier model (full training set) ===
 
 IB1 instance-based classifier
-using 1 nearest neighbour(s) for classification
-
+using 4 nearest neighbour(s) for classification
 
 Time taken to build model: 0 seconds
 
-=== Cross-validation ===
+=== Stratified cross-validation ===
 === Summary ===
+
+Correctly Classified Instances        3031               70.6321 %
+Incorrectly Classified Instances      1968               29.3679 %
 
 Correlation coefficient                  0.9703
 Mean absolute error                      0.3957
