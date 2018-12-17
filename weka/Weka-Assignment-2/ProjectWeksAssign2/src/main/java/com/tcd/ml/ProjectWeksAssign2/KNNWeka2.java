@@ -6,21 +6,34 @@ import weka.classifiers.Evaluation;
 import weka.classifiers.lazy.IBk;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.NumericToNominal;
 
 public class KNNWeka2 {
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		DataSource source = new DataSource("src/main/java/resources/knn.arff");
 		Instances dataset = source.getDataSet();
-		dataset.setClassIndex(dataset.numAttributes()-1);
+		dataset.setClassIndex(dataset.numAttributes() - 1);
+		NumericToNominal convert = new NumericToNominal();
+		String[] options = new String[2];
+		options[0] = "-R";
+		options[1] = "1-2"; // range of variables to make numeric
+
+		convert.setOptions(options);
+		convert.setInputFormat(dataset);
+
+		Instances newData = Filter.useFilter(dataset, convert);
 		/**
 		 * KNN model
 		 */
 		IBk ibk = new IBk();
 		ibk.setKNN(4);
-		ibk.buildClassifier(dataset);
-		Evaluation knn = new Evaluation(dataset);
-		knn.evaluateModel(ibk, dataset);
-		knn.crossValidateModel(ibk, dataset, 10, new Random(1));
-		System.out.println(knn.toSummaryString());
+		ibk.buildClassifier(newData);
+		Evaluation knn = new Evaluation(newData);
+		knn.evaluateModel(ibk, newData);
+		for (int i = 0; i <= 10; i++) {
+			knn.crossValidateModel(ibk, newData, 10, new Random(i));
+			System.out.println(knn.toSummaryString());
+		}
 	}
 }
