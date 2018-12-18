@@ -28,12 +28,12 @@ df = pd.read_csv("../dataset.preprocessed/carinsurance/cleaned.csv")
 
 X = df[['NoOfContacts']]
 Y = df['LastContactDay']
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 5)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3)
 
 
 lm = LinearRegression()
 
-kf = KFold(n_splits=10,shuffle=False)
+kf = KFold(n_splits=10,shuffle=True)
 for train_idx, test_idx in kf.split(X_train, Y_train):
   _x_train = X_train.values[train_idx]
   _y_train = Y_train.values[train_idx]
